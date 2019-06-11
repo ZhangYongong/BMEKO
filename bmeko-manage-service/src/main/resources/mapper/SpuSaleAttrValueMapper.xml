@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.baizhang.bmeko.manage.mapper.SpuSaleAttrValueMapper">
+
+    <select id="selectSkuSaleAttrValueListBySpu" resultMap="selectSkuSaleAttrValueListBySpuMap">
+
+    select ssav.id as ssavId,
+    info.id,ssav.sale_attr_value_id from sku_info info ,sku_sale_attr_value ssav
+    where ssav.sku_id = info.id
+    and info.spu_id =#{spuId};
+
+
+    </select>
+
+    <resultMap id="selectSkuSaleAttrValueListBySpuMap" type="com.baizhang.bmeko.bean.SkuInfo" autoMapping="true">
+        <result property="id" column="id"></result>
+
+        <collection property="skuSaleAttrValueList" ofType="com.baizhang.bmeko.bean.SkuSaleAttrValue" autoMapping="true">
+            <result property="id" column="ssavId"></result>
+        </collection>
+
+    </resultMap>
+
+</mapper>
